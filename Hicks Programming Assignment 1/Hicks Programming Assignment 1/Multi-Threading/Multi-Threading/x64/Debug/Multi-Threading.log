@@ -1,0 +1,4 @@
+﻿  main.cpp
+C:\Users\joe9n\OneDrive\Desktop\Multi-Threading\Hicks Programming Assignment 1\Multi-Threading\Multi-Threading\main.cpp(51,11): warning C4101: 'max': unreferenced local variable
+C:\Users\joe9n\OneDrive\Desktop\Multi-Threading\Hicks Programming Assignment 1\Multi-Threading\Multi-Threading\main.cpp(51,6): warning C4101: 'min': unreferenced local variable
+  Multi-Threading.vcxproj -> C:\Users\joe9n\OneDrive\Desktop\Multi-Threading\Hicks Programming Assignment 1\Multi-Threading\x64\Debug\Multi-Threading.exe
