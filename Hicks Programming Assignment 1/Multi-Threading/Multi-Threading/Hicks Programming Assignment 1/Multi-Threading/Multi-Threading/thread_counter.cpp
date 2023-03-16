@@ -8,7 +8,7 @@ class ThreadCounter
 public:
 	void output_cpp_version(int thread_num, int min, int max)
 	{
-		std::cout << "Start Thread " << thread_num << std::endl;
+		std::cout << "Start Thread - " << thread_num << std::endl;
 
 		// Used to determain the min/max each thread counts to
 		switch (thread_num)
@@ -22,11 +22,11 @@ public:
 		// Prints current number
 		while (min <= max)
 		{
-			std::cout << min << std::endl;
+			std::cout << "Thread #" << thread_num << ": " << min << std::endl;
 			min++;
 		}
 
-		std::cout << "Finish Thread " << thread_num << std::endl << std::endl;
+		std::cout << "Finish Thread - " << thread_num << std::endl << std::endl;
 	}
 
 	void create_cpp_thread(int thread_count)

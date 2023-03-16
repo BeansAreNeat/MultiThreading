@@ -5,12 +5,10 @@
 #include "thread_counter.cpp"
 
 CONDITION_VARIABLE CV;
-//CRITICAL_SECTION critical;
-HANDLE mutex;
 
 void output_c_version(int thread_num, int max, int min)
 {
-	std::cout << "Start Thread " << thread_num << std::endl;
+	std::cout << "Start Thread - " << thread_num << std::endl << std::endl;
 
 	// Used to determain the min/max each thread counts to
 	switch (thread_num) {
@@ -21,30 +19,21 @@ void output_c_version(int thread_num, int max, int min)
 	}
 
 	// Prints current number
-	for(int i = min; i < max; i++)
-		std::cout << i << std::endl;
+	for (int i = min; i < max; i++)
+		std::cout << "Thread #" << thread_num << ": " << i << std::endl;
 
-	std::cout << "Finish Thread " << thread_num << std::endl << std::endl;
+	std::cout << "Finish Thread - " << thread_num << std::endl << std::endl;
 }
 
 unsigned int __stdcall create_c_thread(void* arg)
 {
 	int thread_num = *(int*)arg;
-
-	//EnterCriticalSection(&critical);
-	WaitForSingleObject(mutex, INFINITE);
-
 	output_c_version(thread_num, 0, 0);
-
-	ReleaseMutex(mutex);
-	//LeaveCriticalSection(&critical);
 	return 0;
 }
 
-// I only included this to show the both versions have the same result
 void cpp_version()
 {
-	// C++ Verison of the multi-threading
 	std::cout << "Start Application" << std::endl;
 	ThreadCounter thread;
 	thread.create_cpp_thread(4);
@@ -54,14 +43,11 @@ void cpp_version()
 
 int main()
 {
-	//cpp_version();
-
+	// C++ Verison of the multi-threading
+	cpp_version();
 	// C Verison of the multi-threading
 	const int num_threads = 4;
-
 	std::cout << "Start Application" << std::endl;
-	//InitializeCriticalSection(&critical);
-	mutex = CreateMutex(0, 0, 0);
 
 	HANDLE handles[num_threads];
 	int thread_args[num_threads];
@@ -73,15 +59,11 @@ int main()
 
 	WaitForMultipleObjects(num_threads, handles, true, INFINITE);
 
-	for (int i = 0; i < num_threads; i++) {
+	for (int i = 0; i < num_threads; i++)
 		CloseHandle(handles[i]);
-	}
 
 	getchar();
-	CloseHandle(mutex);
-
 	std::cout << "End Application" << std::endl;
 	std::cout << std::endl;
-	//DeleteCriticalSection(&critical);
 	return 0;
 }
